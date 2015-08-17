@@ -2,7 +2,7 @@
 
 ##### Simple to do list in Silex, 08/05/15
 
-#### By Don Schemmel
+#### By Don Schemmel & Mitch Rivet
 
 ## Description
 
