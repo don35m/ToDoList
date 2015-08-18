@@ -35,7 +35,7 @@
 
               $description = "Wash the dog";
               $category_id = $test_category->getId();
-              $test_task = new Task($description, $id, $category_id);
+              $test_task = new Task($description, $id, $category_id, $task_date);
 
               //Act
               $test_task->save();
@@ -56,7 +56,7 @@
 
               $description = "Wash the dog";
               $category_id = $test_category->getId();
-              $test_Task = new Task ($description, $id, $category_id);
+              $test_Task = new Task ($description, $id, $category_id, $task_date);
               $test_Task->save();
 
               $description2 = "Water the lawn";
