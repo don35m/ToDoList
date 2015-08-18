@@ -62,7 +62,7 @@ class Task
           }
         }
 
-        return $found_task; 
+        return $found_task;
     }
 
 }
