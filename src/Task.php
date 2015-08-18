@@ -4,12 +4,14 @@ class Task
     private $description;
     private $category_id;
     private $id;
+    private $task_date;
 
-    function __construct($description, $id = null, $category_id)
+    function __construct($description, $id = null, $category_id, $task_date)
     {
         $this->description = $description;
         $this->id = $id;
         $this->category_id = $category_id;
+        $this->task_date = $task_date;
     }
 
 
@@ -33,9 +35,19 @@ class Task
         return $this->description;
     }
 
+    function getTaskDate()
+    {
+        return $this->task_date;
+    }
+
+    function setTaskDate($new_task_date)
+    {
+      $this->task_date = (string) $new_task_date;
+    }
+
     function save()
     {
-        $statement = $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id) VALUES ('{$this->getDescription()}', {$this->getCategoryId()})");
+        $statement = $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id, task_date) VALUES ('{$this->getDescription()}', {$this->getCategoryId()}, '{$this->getTaskDate()}')");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
@@ -47,7 +59,8 @@ class Task
             $description = $task['description'];
             $id = $task['id'];
             $category_id = $task['category_id'];
-            $new_task = new Task($description, $id, $category_id);
+            $task_date = $task['task_date'];
+            $new_task = new Task($description, $id, $category_id, $task_date);
             array_push($tasks, $new_task);
 
         }

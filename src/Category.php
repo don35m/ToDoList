@@ -40,7 +40,8 @@
                 $description = $task['description'];
                 $id = $task['id'];
                 $category_id = $task['category_id'];
-                $new_task = new Task($description, $id, $category_id);
+                $task_date = $task['task_date'];
+                $new_task = new Task($description, $id, $category_id, $task_date);
                 array_push($tasks, $new_task);
             }
             return $tasks;
@@ -62,6 +63,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM categories;");
+            $GLOBALS['DB']->exec("DELETE FROM tasks;");
         }
 
         static function find($search_id)
