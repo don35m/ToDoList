@@ -19,6 +19,7 @@
         protected function tearDown()
         {
             Category::deleteAll();
+            Task::deleteAll();
         }
 
         function test_getName()
@@ -72,7 +73,7 @@
             $test_Category = new Category($name);
             $test_Category->save();
             $test_Category2 = new Category($name2);
-            test_Category2->save();
+            $test_Category2->save();
 
             //Act
             $result = Category::getAll();
