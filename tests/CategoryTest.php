@@ -8,7 +8,7 @@
     require_once "src/Category.php";
     require_once "src/Task.php";
 
-    $server = 'mysql:host=localhost;dbname=to_do_test';
+    $server = 'mysql:host=localhost:8889;dbname=to_do_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -93,11 +93,12 @@
             $test_category_id = $test_category->getId();
 
             $description = "Email client";
-            $test_task = new Task($description, $id, $test_category_id);
+            $task_date = "2015-03-18";
+            $test_task = new Task($description, $test_category_id, $id, $task_date);
             $test_task->save();
 
             $description2 = "Meet with boss";
-            $test_task2 = new Task($description2, $id, $test_category_id);
+            $test_task2 = new Task($description2, $test_category_id, $id, $task_date);
             $test_task2->save();
 
             //Act

@@ -4,8 +4,9 @@
     require_once __DIR__."/../src/Category.php";
 
     $app = new Silex\Application();
+    $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=to_do_test';
+    $server = 'mysql:host=localhost:8889;dbname=to_do';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -18,6 +19,14 @@
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
+    $app->get("tasks", function() use ($app) {
+        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
+    });
+
+    $app->get("/categories", function() use ($app) {
+        return $app['twig']->render('categories.html.twig', array('categories' => Category::getAll()));
+    });
+
     $app->get("/categories/{id}", function($id) use ($app) {
         $category = Category::find($id);
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
@@ -25,8 +34,9 @@
 
     $app->post("/tasks", function() use ($app) {
         $description = $_POST['description'];
+        $task_date = $_POST['task_date'];
         $category_id = $_POST['category_id'];
-        $task = new Task($description, $id = null, $category_id);
+        $task = new Task($description, $task_date, $id = null, $category_id);
         $task->save();
         $category = Category::find($category_id);
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => Task::getAll()));
